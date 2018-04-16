@@ -1,5 +1,4 @@
 
-
 library(shiny)
 
 # Define UI for application that draws a histogram
@@ -25,7 +24,11 @@ shinyUI(fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-            h2("Please input Bill Total, Tips % and Split Bill to generate final amount for your bill !"),
+            h1("About Easy Tips Calculator:"),
+            h3("This app is designed for calculating your tips easily. 
+               All you need to do is give the following 3 information: 
+               Bill Total, Tips % and Split Bill to generate your final bill."),
+            h2("Now, Please input Bill Total, Tips % & Split Bill to generate final amount for your bill !"),
             h3("Bill Total: $"),
             textOutput("text1"),
             h3("Tips Total: $"),
