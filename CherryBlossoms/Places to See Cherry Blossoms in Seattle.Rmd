@@ -1,0 +1,91 @@
+---
+title: "Places to See Cherry Blossoms in Seattle"
+author: "Wan-Ling Hsu"
+date: "3/30/2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+## Developing Data Products Week 2 Assignment 
+### (Coursera - Data Science Specialization) 
+### Instructions
+Create a web page using R Markdown that features a map created with Leaflet.
+
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity!
+
+### Review criteria
+
+The rubric contains the following two questions:
+
+- Does the web page feature a date and is this date less than two months before the date that you’re grading this assignment?
+- Does the web page feature an interactive map that appears to have been created with Leaflet?
+
+### My Submissions
+
+Here are several places you can see cherry blossoms around Seattle and enjoy walking through cherry trees to welcome Spring
+
+* The quad at the University of Washington
+* Washington Park Arboretum 
+* Seward Park and Lake Washington Boulevard
+* Jefferson Park
+
+#### 1. Please click the blue icon on the map to find out the place's name.
+```{r cherryBlossoms1}
+# install.packages('devtools')
+# devtools::install_github('rstudio/leaflet')
+library(leaflet)
+cherryBlossoms1 <- leaflet() %>%
+        addTiles() %>%
+        addMarkers(lat=47.657263, lng=-122.307198, popup="University of Washington Quad") %>%
+        addMarkers(lat=47.637,    lng=-122.296   , popup="Washington Park Arboretum") %>%
+        addMarkers(lat=47.556,    lng=-122.251   , popup="Seward Park and Lake Washington Boulevard") %>%
+        addMarkers(lat=47.566611, lng=-122.307333, popup="Jefferson Park")
+
+cherryBlossoms1
+
+```
+
+
+#### 2. Each place and its address shows on the map. Please click the place's name to link to the offical website to get relevant information. 
+```{r cherryBlossoms2}
+library(leaflet)
+UW <- paste(sep = "<br/>",
+  "<b><a href='https://www.washington.edu/news/2018/02/23/university-of-washington-cherry-blossom-watch-2018/'>
+  University of Washington Quad</a></b>",
+  "1400 NE Campus Pkwy",
+  "King Ln  Pierce Ln",
+  "Seattle, WA 98195"
+)
+
+Arboretum <- paste(sep = "<br/>",
+  "<b><a href='https://botanicgardens.uw.edu/washington-park-arboretum/visit/'>
+  Washington Park Arboretum</a></b>",
+  "2300 Arboretum Dr E",
+  "Seattle, WA 98112"
+)
+
+Seward <- paste(sep = "<br/>",
+  "<b><a href='https://www.seattle.gov/parks/find/parks/seward-park'>
+  Seward Park</a></b>",
+  "5900 Lake Washington Blvd S",
+  "Seattle, WA 98118"
+)
+
+Jefferson <- paste(sep = "<br/>",
+  "<b><a href='https://www.seattle.gov/parks/find/parks/jefferson-park'>
+  Jefferson Park</a></b>",
+  "4101 Beacon Ave S",
+  "Seattle, WA 98108"
+)
+
+cherryBlossoms2 <- leaflet() %>%
+        addTiles() %>%
+  addPopups(lat=47.657263, lng=-122.307198, popup = UW       , options = popupOptions(closeButton = FALSE)) %>%
+  addPopups(lat=47.637,    lng=-122.296   , popup = Arboretum, options = popupOptions(closeButton = FALSE)) %>%
+  addPopups(lat=47.556,    lng=-122.251   , popup = Seward   , options = popupOptions(closeButton = FALSE)) %>%
+  addPopups(lat=47.566611, lng=-122.307333, popup = Jefferson, options = popupOptions(closeButton = FALSE))
+
+cherryBlossoms2
+```
