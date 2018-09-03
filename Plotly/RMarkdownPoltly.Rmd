@@ -1,0 +1,84 @@
+---
+title: "R Markdown & Plotly"
+author: "Wan-Ling Hsu"
+date: "4/5/2018"
+output: ioslides_presentation
+---
+<style>
+div.blue pre { background-color:lightblue; }
+div.blue pre.r { background-color:blue; }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## <span style="color:darkgreen">Coursera - Data Science Specialization - Developing Data Products Assignment: R Markdown Presentation & Plotly</span>
+ 
+
+<span style="color:blue">**Instructions**</span>
+
+- Create a web page presentation using R Markdown that features a plot created with Plotly. 
+- Host the webpage on either GitHub Pages, RPubs, or NeoCities. 
+- The webpage must contain the date that you created the document, and it must contain a plot created with Plotly. 
+
+
+## <span style="color:darkgreen">Data description</span>
+This is a fuel economy data (<span style="color:red">mpg</span>; 234 rows, 11 variables), from 1999 and 2008 for 38 popular models of car.
+
+| variable name                                         | Description          |variable name                            | Description                                          |
+|-------------------------------------------------------|:--------------------:|-----------------------------------------|:----------------------------------------------------:|
+|<span style="color:blue">**manufacturer, model**</span>| model name           |<span style="color:blue">**displ**</span>| engine displacement, in litres                       |
+|<span style="color:blue"> **year**</span>              | year of manufacture  |<span style="color:blue">**cyl**</span>  | number of cylinders                                  |
+|<span style="color:blue">**trans**</span>              | type of transmission |<span style="color:blue">**drv**</span>  |: f = front-wheel drive, r = rear wheel drive, 4 = 4wd|
+|<span style="color:blue">**cty**</span>                | city miles per gallon|<span style="color:blue">**hwy**</span>  | highway miles per gallon                             |
+|<span style="color:blue">**fl**</span>                 | fuel type            |<span style="color:blue">**class**</span>| "type" of car                                        |
+
+
+## <span style="color:darkgreen">mpg data</span>
+```{r, echo=TRUE, message=FALSE, comment=NA}
+library(ggplot2)
+library(plotly)
+data(mpg)
+mpg
+```
+
+
+##<span style="color:darkgreen">engine displacement & N. of cylinders</span>
+```{r, echo=TRUE, comment=NA}
+summary(mpg$displ);table(mpg$displ) # engine displacement, in litres
+```
+
+```{r, echo=TRUE, comment=NA}
+summary(mpg$cyl); table(mpg$cyl) # number of cylinders
+```
+##<span style="color:darkgreen">"city" & "highway" miles per gallon</span>
+```{r, echo=TRUE, comment=NA}
+summary(mpg$cty);table(mpg$cty)  # city miles per gallon
+```
+
+```{r, echo=TRUE, comment=NA}
+summary(mpg$hwy); table(mpg$hwy) # highway miles per gallon
+```
+
+## <span style="color:darkgreen">scatter plot with colors (factors)</span>
+
+```{r, echo=TRUE}
+g <- ggplot(mpg, aes(displ, cty, colour = manufacturer))+geom_point()
+p = ggplotly(g); p
+```
+
+
+## <span style="color:darkgreen">scatter plot with colors (continuous)</span>
+```{r, echo=TRUE}
+g <- ggplot(mpg, aes(x=displ, y=cty, colour = cyl)) + geom_point()
+p = ggplotly(g); p
+```
+
+
+
+## <span style="color:darkgreen">3D Scatter Plot</span>
+```{r, echo=TRUE}
+plot_ly(x=mpg$displ, y=mpg$cty, z=mpg$hwy, type="scatter3d", 
+        mode="markers", color=mpg$cyl)
+```
