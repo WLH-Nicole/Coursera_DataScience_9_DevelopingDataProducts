@@ -1,4 +1,4 @@
-# Coursera_DataScience_9_DevelopingDataProducts
+# Data Science Specialization on Coursera: Developing Data Products
 Please click my RPubs for these products:
 
 ## Easy Tips Calculator App
